@@ -23,6 +23,7 @@
 import config as cf
 import sys
 import controller
+import time
 from DISClib.ADT import list as lt
 assert cf
 
@@ -37,7 +38,10 @@ operación solicitada
 def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
-    print("2- ")
+    print("2- Videos por categorias y páis")
+    print("3- Encontrar video tendencia por país")
+    print("4- Video tendencia por categorias")
+    print("5- Videos por más likes")
 
 catalog = None
 
@@ -51,8 +55,19 @@ while True:
         print("Cargando información de los archivos ....")
 
     elif int(inputs[0]) == 2:
-        pass
+        t1=time.process_time()
+        print("Se ejecuto requerimiento 1")
+        t2=time.process_time()
+        print(str(t2-t1) +" tiempo de ejecución")
+    elif int(inputs[0]) == 3:
+        print ("Se ejecuto requerimiento 2")
+    elif int(inputs[0]) == 4:
+        print ("Se ejecuto requerimiento 3")
+    elif int(inputs[0]) == 5:
+        print ("Se ejecuto requerimiento 4")
 
     else:
         sys.exit(0)
 sys.exit(0)
+
+
