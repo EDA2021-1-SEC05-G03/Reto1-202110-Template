@@ -53,7 +53,10 @@ while True:
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
         print("Cargando información de los archivos ....")
-
+        catalog = controller.initcatalog()
+        controller.cargardatos(catalog)
+        print ("Se cargó la información del catalogo")
+        print ("Se cargaron "+ str(lt.size(catalog["videos"])) +" videos")
     elif int(inputs[0]) == 2:
         t1=time.process_time()
         print("Se ejecuto requerimiento 1")
