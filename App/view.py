@@ -57,6 +57,10 @@ while True:
         controller.cargardatos(catalog)
         print ("Se cargó la información del catalogo")
         print ("Se cargaron "+ str(lt.size(catalog["videos"])) +" videos")
+        category = controller.initcategory()
+        controller.cargardatoss(category)
+        print ("Se cargó la información del category id")
+        print ("Se cargaron "+ str(lt.size(category["categorias"])) +" categorias")
     elif int(inputs[0]) == 2:
         t1=time.process_time()
         print("Se ejecuto requerimiento 1")

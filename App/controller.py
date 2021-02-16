@@ -38,6 +38,16 @@ def cargardatos(catalog):
     input_file = csv.DictReader(open(vfile, encoding='utf-8'))
     for video in input_file:
         model.addvideo(catalog, video)
+
+def initcategory ():
+    category = model.initcategory()
+    return category
+
+def cargardatoss(category):
+    cfile = cf.data_dir + 'videos/category-id.csv'
+    input_file = csv.DictReader(open(cfile, encoding='utf-8'))
+    for categorias in input_file:
+        model.addcategory(category,categorias)
 # Inicialización del Catálogo de libros
 
 # Funciones para la carga de datos

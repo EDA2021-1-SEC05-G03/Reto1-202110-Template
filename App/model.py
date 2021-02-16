@@ -39,6 +39,10 @@ def initcatalog ():
     return {"videos": lt.newList('ARRAY_LIST')}
 def addvideo (catalog, video):
     lt.addLast(catalog["videos"],video)
+def initcategory ():
+    return {"categorias": lt.newList('ARRAY_LIST')}
+def addcategory (category,categorias):
+    lt.addLast(category["categorias"],categorias)
     
 
 # Construccion de modelos
