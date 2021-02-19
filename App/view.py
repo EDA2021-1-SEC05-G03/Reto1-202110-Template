@@ -61,6 +61,11 @@ while True:
         controller.cargardatoss(category)
         print ("Se cargó la información del category id")
         print ("Se cargaron "+ str(lt.size(category["categorias"])) +" categorias")
+        estructuradedatos=input("Cual estructura de datos desea ? (ARRAY_LIST/LINKED_LIST")
+        Numerodeelementos=int(input("Numero de Datos?"))
+        algoritmo=input("Cual algoritmo desea? (shell/insert/selection")
+        controller.mejoresvideosporviews(catalogo,estructuradedatos,Numerodeelementos,algoritmo)
+
     elif int(inputs[0]) == 2:
         t1=time.process_time()
         print("Se ejecuto requerimiento 1")
