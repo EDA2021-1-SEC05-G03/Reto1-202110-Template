@@ -54,14 +54,13 @@ while True:
     if int(inputs[0]) == 1:
         estructuradedatos=input("Cual estructura de datos desea ? (ARRAY_LIST/LINKED_LIST) ")
         print("Cargando información de los archivos ....")
-        catalog = controller.initcatalog()
+        catalog = controller.initcatalog(estructuradedatos)
         controller.cargardatos(catalog)
         print ("Se cargó la información del catalogo")
         print ("Se cargaron "+ str(lt.size(catalog["videos"])) +" videos")
-        category = controller.initcategory()
-        controller.cargardatoss(category)
+        controller.cargardatoss(catalog)
         print ("Se cargó la información del category id")
-        print ("Se cargaron "+ str(lt.size(category["categorias"])) +" categorias")
+        print ("Se cargaron "+ str(lt.size(catalog["category"])) +" categorias")
     elif int(inputs[0]) == 2:
         t1=time.process_time()
         Numerodeelementos=int(input("Numero de Datos? "))

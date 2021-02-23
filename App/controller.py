@@ -23,6 +23,11 @@
 import config as cf
 import model
 import csv
+from DISClib.ADT import list as lt
+import time
+from DISClib.Algorithms.Sorting import shellsort as sa
+from DISClib.Algorithms.Sorting import insertionsort as ins
+from DISClib.Algorithms.Sorting import selectionsort as sel
 
 
 """
@@ -31,26 +36,34 @@ El controlador se encarga de mediar entre la vista y el modelo.
 
 
 def initcatalog (estructuradedatos):
-    catalog = model.initcatalog(estructuradedatos)
+    catalog = model.newCatalog(estructuradedatos)
     return catalog
 def cargardatos(catalog):
     vfile = cf.data_dir + 'videos/videos-small.csv'
     input_file = csv.DictReader(open(vfile, encoding='utf-8'))
     for video in input_file:
         model.addvideo(catalog, video)
-
-def initcategory (estructuradedatos):
-    category = model.initcategory(estructuradedatos)
-    return category
-
 def cargardatoss(category):
     cfile = cf.data_dir + 'videos/category-id.csv'
     input_file = csv.DictReader(open(cfile, encoding='utf-8'))
     for categorias in input_file:
         model.addcategory(category,categorias)
-
-def sortvideos(catalog, Numerodeelementos,algoritmos):
-   return model.sortvideos(catalog, Numerodeelementos,algoritmo)
+def compareviews(video1, video2):
+    return (float(video1['views']) < float(video2['views']))
+def sortvideos(catalog, Numerodeelementos, algoritmo):
+    sub_list = lt.subList(catalog['videos'], 0, Numerodeelementos)
+    sub_list = sub_list.copy()
+    start_time = time.process_time()
+    if algoritmo ==  "shell":
+       sorted_list = sa.sort(sub_list, compareviews)
+    elif  algoritmo ==  "insertion":
+      sorted_list = ins.sort(sub_list, compareviews)
+    elif  algoritmo ==  "selection":
+      sorted_list = sel.sort(sub_list, compareviews)
+    stop_time = time.process_time()
+    elapsed_time_mseg = (stop_time - start_time)*1000
+    return elapsed_time_mseg, sorted_list
+    
 # Inicialización del Catálogo de libros
 
 # Funciones para la carga de datos

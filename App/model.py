@@ -28,47 +28,34 @@
 import config as cf
 import time
 from DISClib.ADT import list as lt
-from DISClib.Algorithms.Sorting import shellsort as sa
-from DISClib.Algorithms.Sorting import insertionsort as ins
-from DISClib.Algorithms.Sorting import selectionsort as sel
 assert cf
 
 """
 Se define la estructura de un catálogo de videos. El catálogo tendrá dos listas, una para los videos, otra para las categorias de
 los mismos.
 """
+def newCatalog(estructuradedatos):
+    """
+    Inicializa el catálogo de libros. Crea una lista vacia para guardar
+    todos los libros, adicionalmente, crea una lista vacia para los autores,
+    una lista vacia para los generos y una lista vacia para la asociación
+    generos y libros. Retorna el catalogo inicializado.
+    """
+    catalog = {'videos': None,
+               'category': None}
 
-def initcatalog (estructuradedatos):
-    if estructuradedatos == "ARRAY_LIST":
-      r={"videos": lt.newList('ARRAY_LIST')}
-    elif estructuradedatos == "LINKED_LIST":
-      r={"videos": lt.newList('LINKED_LIST')}
-    return r
+    catalog['videos'] = lt.newList(estructuradedatos)
+    catalog['category'] = lt.newList(estructuradedatos)
+
+    return catalog
+
 def addvideo (catalog, video):
     lt.addLast(catalog["videos"],video)
-def initcategory (estructuradedatos):
-    if estructuradedatos == "ARRAY_LIST":
-       r={"categorias": lt.newList('ARRAY_LIST')}
-    elif estructuradedatos == "LINKED_LIST":
-       r={"categorias": lt.newList('LINKED_LIST')}
-    return r
-def addcategory (category,categorias):
-    lt.addLast(category["categorias"],categorias)
-def compareviews(video1, video2):
-    return (float(video1['views']) < float(video2['views']))
-def sortvideos(catalog, Numerodeelementos,algoritmo):
-    sub_list = lt.subList(catalog['videos'], 0, Numerodeelementos)
-    sub_list = sub_list.copy()
-    start_time = time.process_time()
-    if algoritmo ==  "shell":
-       sorted_list = sa.sort(sub_list, compareviews)
-    elif  algoritmo ==  "insertion":
-      sorted_list = ins.sort(sub_list, compareviews)
-    elif  algoritmo ==  "selection":
-      sorted_list = sel.sort(sub_list, compareviews)
-    stop_time = time.process_time()
-    elapsed_time_mseg = (stop_time - start_time)*1000
-    return elapsed_time_mseg, sorted_list
+
+def addcategory (catalog,categorias):
+    lt.addLast(catalog["category"],categorias)
+
+
 
 # Construccion de modelos
 
