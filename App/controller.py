@@ -56,7 +56,7 @@ def sortvideos(catalog, Numerodeelementos, algoritmo):
     start_time = time.process_time()
     if algoritmo ==  "shell":
        sorted_list = sa.sort(sub_list, compareviews)
-    elif  algoritmo ==  "insertion":
+    elif  algoritmo ==  "insert":
       sorted_list = ins.sort(sub_list, compareviews)
     elif  algoritmo ==  "selection":
       sorted_list = sel.sort(sub_list, compareviews)
