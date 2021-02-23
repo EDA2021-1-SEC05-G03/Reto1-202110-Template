@@ -52,6 +52,7 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
+        estructuradedatos=input("Cual estructura de datos desea ? (ARRAY_LIST/LINKED_LIST) ")
         print("Cargando información de los archivos ....")
         catalog = controller.initcatalog()
         controller.cargardatos(catalog)
@@ -61,13 +62,11 @@ while True:
         controller.cargardatoss(category)
         print ("Se cargó la información del category id")
         print ("Se cargaron "+ str(lt.size(category["categorias"])) +" categorias")
-        estructuradedatos=input("Cual estructura de datos desea ? (ARRAY_LIST/LINKED_LIST")
-        Numerodeelementos=int(input("Numero de Datos?"))
-        algoritmo=input("Cual algoritmo desea? (shell/insert/selection")
-        controller.mejoresvideosporviews(catalogo,estructuradedatos,Numerodeelementos,algoritmo)
-
     elif int(inputs[0]) == 2:
         t1=time.process_time()
+        Numerodeelementos=int(input("Numero de Datos? "))
+        algoritmo=input("Cual algoritmo desea? (shell/insert/selection) ")
+        controller.sortvideos(catalog,Numerodeelementos,algoritmo)
         print("Se ejecuto requerimiento 1")
         t2=time.process_time()
         print(str(t2-t1) +" tiempo de ejecución")
