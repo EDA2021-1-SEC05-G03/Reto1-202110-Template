@@ -28,6 +28,9 @@ import time
 from DISClib.Algorithms.Sorting import shellsort as sa
 from DISClib.Algorithms.Sorting import insertionsort as ins
 from DISClib.Algorithms.Sorting import selectionsort as sel
+from DISClib.Algorithms.Sorting import quicksort as qu
+from DISClib.Algorithms.Sorting import mergesort as me
+
 
 
 """
@@ -60,6 +63,10 @@ def sortvideos(catalog, Numerodeelementos, algoritmo):
       sorted_list = ins.sort(sub_list, compareviews)
     elif  algoritmo ==  "selection":
       sorted_list = sel.sort(sub_list, compareviews)
+    elif  algoritmo ==  "merge":
+      sorted_list = me.sort(sub_list, compareviews)
+    elif  algoritmo ==  "quick":
+      sorted_list = qu.sort(sub_list, compareviews)
     stop_time = time.process_time()
     elapsed_time_mseg = (stop_time - start_time)*1000
     return elapsed_time_mseg, sorted_list

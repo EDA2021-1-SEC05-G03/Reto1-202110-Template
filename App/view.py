@@ -64,7 +64,7 @@ while True:
     elif int(inputs[0]) == 2:
         t1=time.process_time()
         Numerodeelementos=int(input("Numero de Datos? "))
-        algoritmo=input("Cual algoritmo desea? (shell/insert/selection) ")
+        algoritmo=input("Cual algoritmo desea? (shell/insert/selection/quick/merge) ")
         controller.sortvideos(catalog,Numerodeelementos,algoritmo)
         print("Se ejecuto requerimiento 1")
         t2=time.process_time()
