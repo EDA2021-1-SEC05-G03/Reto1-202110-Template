@@ -42,7 +42,9 @@ def newCatalog(estructuradedatos):
     generos y libros. Retorna el catalogo inicializado.
     """
     catalog = {'videos': None,
-               'category': None}
+               'category': None,
+               'tags': None,
+               'video_tags': None}
 
     catalog['videos'] = lt.newList(estructuradedatos, cmpfunction = comparevideosid)
     catalog['category'] = lt.newList(estructuradedatos, cmpfunction = comparecategoryid)
