@@ -42,15 +42,20 @@ def newCatalog(estructuradedatos):
     generos y libros. Retorna el catalogo inicializado.
     """
     catalog = {'videos': None,
-               'category': None}
+               'category': None,
+               'tags': None,
+               'video_tags': None}
 
-    catalog['videos'] = lt.newList(estructuradedatos)
-    catalog['category'] = lt.newList(estructuradedatos)
+    catalog['videos'] = lt.newList(estructuradedatos, cmpfunction = comparevideosid)
+    catalog['category'] = lt.newList(estructuradedatos, cmpfunction = comparecategoryid)
+    catalog['tags'] = lt.newList(estructuradedatos, cmpfunction = comparetags)
+    catalog['video_tags'] = lt.newList(estructuradedatos)
 
     return catalog
 
 def addvideo (catalog, video):
     lt.addLast(catalog["videos"],video)
+    tags=video['tags'].split('|')
 
 def addcategory (catalog,categorias):
     lt.addLast(catalog["category"],categorias)

@@ -61,6 +61,7 @@ while True:
         controller.cargardatoss(catalog)
         print ("Se cargó la información del category id")
         print ("Se cargaron "+ str(lt.size(catalog["category"])) +" categorias")
+        print (catalog['category'])
     elif int(inputs[0]) == 2:
         t1=time.process_time()
         Numerodeelementos=int(input("Numero de Datos? "))
