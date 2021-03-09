@@ -34,6 +34,16 @@ Presenta el menu de opciones y por cada seleccion
 se hace la solicitud al controlador para ejecutar la
 operación solicitada
 """
+def printResults(catalog, sample=1):
+     size = lt.size(catalog["videos"])
+     if(size > sample):
+         print("El primer ", sample, "video es:")
+         i = 1
+         while i <= sample:
+             video = lt.getElement(catalog['videos'], i)
+             print('Titulo: ' + video['title'] + ' Titulo del canal: ' + 
+                 video['channel_title'] + '  Fecha de tendencia: ' + video['trending_date']+ " pais: "+ video["country"] + " visitas: " + video["views"]+ " likes: " + video["likes"]+ " Dislikes: "+ video["dislikes"])
+             i+=1
 
 def printMenu():
     print("Bienvenido")
@@ -61,15 +71,15 @@ while True:
         controller.cargardatoss(catalog)
         print ("Se cargó la información del category id")
         print ("Se cargaron "+ str(lt.size(catalog["category"])) +" categorias")
-        print(catalog['videos'])
+        print(catalog["category"])
+        printResults(catalog,1)
     elif int(inputs[0]) == 2:
         t1=time.process_time()
-        Numerodeelementos=int(input("Numero de Datos? "))
-        algoritmo=input("Cual algoritmo desea? (shell/insert/selection/quick/merge) ")
-        controller.sortvideos(catalog,Numerodeelementos,algoritmo)
+        Nombrecategoria=input(" Digite el nombre de la categoria ")
+        Pais=input(" Digite el pais ")
+        n=int(input(" Digite el numero de videos que quiere listar "))
+        controller.sortvideos(catalog, Nombrecategoria, Pais, n)
         print("Se ejecuto requerimiento 1")
-        t2=time.process_time()
-        print(str(t2-t1) +" tiempo de ejecución")
     elif int(inputs[0]) == 3:
         print ("Se ejecuto requerimiento 2")
     elif int(inputs[0]) == 4:

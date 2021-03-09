@@ -52,24 +52,30 @@ def cargardatoss(category):
     for categorias in input_file:
         model.addcategory(category,categorias)
 def compareviews(video1, video2):
-    return (float(video1['views']) < float(video2['views']))
-def sortvideos(catalog, Numerodeelementos, algoritmo):
-    sub_list = lt.subList(catalog['videos'], 0, Numerodeelementos)
+    return (float(video1['views']) > float(video2['views']))
+
+def sortvideos(catalog, Nombrecategoria, Pais, n):
+    sub_list = lt.subList(catalog['videos'], 1, n )
     sub_list = sub_list.copy()
-    start_time = time.process_time()
-    if algoritmo ==  "shell":
-       sorted_list = sa.sort(sub_list, compareviews)
-    elif  algoritmo ==  "insert":
-      sorted_list = ins.sort(sub_list, compareviews)
-    elif  algoritmo ==  "selection":
-      sorted_list = sel.sort(sub_list, compareviews)
-    elif  algoritmo ==  "merge":
-      sorted_list = me.sort(sub_list, compareviews)
-    elif  algoritmo ==  "quick":
-      sorted_list = qu.sort(sub_list, compareviews)
-    stop_time = time.process_time()
-    elapsed_time_mseg = (stop_time - start_time)*1000
-    return elapsed_time_mseg, sorted_list
+    sorted_list = qu.sort(sub_list, compareviews)
+    size = lt.size(catalog["videos"])
+    if(size > n):
+         print("Los  ", n, "videos son:")
+         i = 1
+         while i <= n:
+             video = lt.getElement(sorted_list, i)
+             print('Titulo: ' + video['title'] + ' pais: ' + 
+                 video['country'] + ' Titulo del canal: ' + 
+                 video['channel_title'] + '  Fecha de tendencia: ' + video['trending_date']+ " hora de publicacion: "+ video["publish_time"] + " visitas: " + video["views"]+ " likes: " + video["likes"]+ " Dislikes: "+ video["dislikes"])
+             i+=1
+
+
+
+
+
+
+    
+
     
 # Inicialización del Catálogo de libros
 

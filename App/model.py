@@ -44,16 +44,22 @@ def newCatalog(estructuradedatos):
     catalog = {'videos': None,
                'category': None}
 
-    catalog['videos'] = lt.newList(estructuradedatos)
-    catalog['category'] = lt.newList(estructuradedatos)
+    catalog['videos'] = lt.newList(estructuradedatos, cmpfunction = comparevideosid)
+    catalog['category'] = lt.newList(estructuradedatos, cmpfunction = comparecategoryid)
 
     return catalog
 
 def addvideo (catalog, video):
     lt.addLast(catalog["videos"],video)
+    tags=video['tags'].split('|')
 
 def addcategory (catalog,categorias):
     lt.addLast(catalog["category"],categorias)
+def comparevideosid(video1, video2):
+    return (float(video1['video_id']) < float(video2['video_id']))
+def comparecategoryid(video1, video2):
+    return (float(video1['id']) < float(video2['id']))
+
 
 
 
