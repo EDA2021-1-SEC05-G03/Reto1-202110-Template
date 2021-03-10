@@ -54,11 +54,16 @@ def requerimiento1(Nombrecategoria, Pais,n,catalog):
     porviews = model.sortvideos(lista_filtros,n)
     return porviews
 
-def videospaises(catalog, country):
-    return model.videospaises(catalog,country)
+def requerimiento2(catalog, Pais):
+    videosfiltrados= model.videospaises(catalog,Pais)
+    masrepetido = model.masrepetido(videosfiltrados)
+    return masrepetido
 
-
-    
+def requerimiento3(catalog,Nombrecategoria):
+    categorias = model.idcategoria(catalog,Nombrecategoria)
+    videosfiltrados= model.videoscategoryname(catalog,categorias)
+    masrepetido = model.masrepetido1(videosfiltrados)
+    return masrepetido
 # Inicialización del Catálogo de libros
 
 # Funciones para la carga de datos

@@ -28,6 +28,7 @@
 import config as cf
 import time
 from DISClib.Algorithms.Sorting import quicksort as qu
+from DISClib.Algorithms.Sorting import mergesort as mg
 from DISClib.ADT import list as lt
 from statistics import mode
 assert cf
@@ -64,7 +65,7 @@ def comparevideosid(video1, video2):
     return (video1['video_id']) <= (video2['video_id'])
 
 def comparecategoryid(video1, video2):
-    return (float(video1['id']) < float(video2['id']))
+    return (float(video1['category_id']) < float(video2['category_id']))
 
 def compareviews(video1, video2):
     return (float(video1['views']) > float(video2['views']))
@@ -91,6 +92,11 @@ def sortvideos(lista_filtros,n):
     sub_list = lt.subList(lista_filtros,1,n)
     return sub_list
 
+
+
+
+
+
 def sortvideosid(lst, size):
     sub_list = lt.subList(lst, 0, size)
     sub_list = sub_list.copy()
@@ -105,8 +111,61 @@ def videospaises(catalog, Pais):
     videos = sortvideosid(lista_paises, lt.size(lista_paises))
     return videos
 
-        
+def masrepetido(videos):
+    i=0
+    contador=0
+    videoconmasrep=0
+    nombre=""
+    while i < lt.size(videos):
+        video1 =lt.getElement(videos,i)
+        video2 =lt.getElement(videos,i+1)
+        if video1["video_id"] == video2["video_id"]:
+            contador+= 1
+        else:
+            if contador > videoconmasrep:
+               videoconmasrep = contador
+               nombre=lt.getElement(videos,i)    
+            contador =0
+        i+=1
+    return (nombre,videoconmasrep)
 
+
+
+
+
+
+
+def sortvideosidcategory(lst, size):
+    sub_list = lt.subList(lst, 0, size)
+    sub_list = sub_list.copy()
+    sorted_list = mg.sort(sub_list, comparecategoryid)
+    return sorted_list
+
+def videoscategoryname(catalog, categorias):
+    lista_categorias=lt.newList("ARRAY_LIST")
+    for video in lt.iterator(catalog['videos']):
+        if video["category_id"]==categorias :
+            lt.addLast(lista_categorias,video)  
+    video = sortvideosidcategory(lista_categorias, lt.size(lista_categorias))
+    return video
+
+def masrepetido1(video):
+    i=0
+    contador=0
+    videoconmasrep=0
+    nombre=0
+    while i < lt.size(video):
+        video1 =lt.getElement(video,i)
+        video2 =lt.getElement(video,i+1)
+        if video1["category_id"] == video2["category_id"]:
+           contador+= 1
+        else:
+            if contador > videoconmasrep:
+               videoconmasrep = contador
+               nombre=(lt.getElement(video,i))   
+            contador =0
+        i+=1
+    return (nombre,videoconmasrep)
 # Construccion de modelos
 
 # Funciones para agregar informacion al catalogo

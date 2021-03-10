@@ -49,16 +49,19 @@ def printreq1(req1):
     for video in elements:
         print('  Fecha de tendencia: ' + video['trending_date']+'Titulo: ' + video['title'] + ' Titulo del canal: ' + video['channel_title'] +  " Hora de publicacion: "+ video["publish_time"] + " visitas: " + video["views"]+ " likes: " + video["likes"]+ " Dislikes: "+ video["dislikes"])
              
-def printResults1(req2):
-    elements = req2['elements']
-    for video in elements:
-             print(" id "+ video["video_id"]+' Titulo: ' + video['title'] + ' Titulo del canal: ' + video['channel_title'] + " pais: "+ video["country"] + ' repetido '+ mode(video["video_id"]))
+
+def printreq2(req2):
+    print('Titulo: ' + req2[0]['title'] + ' Titulo del canal: ' + req2[0]['channel_title'] +  " pais: "+ req2[0]["country"] +" Dias: " + str(req2[1]))
+
+def printreq3(req3):
+    print('Titulo: ' + req3[0]['title'] + ' Titulo del canal: ' + req3[0]['channel_title'] +  " id de la categoria: "+ req3[0]["category_id"] +" Dias: " + str(req3[1]))
+
 
 
 
 def printMenu():
     print("Bienvenido")
-    print("1- Cargar información en el catálogo")
+    print("1- Cargar información en el catálogo")   
     print("2- Videos por categorias y páis")
     print("3- Encontrar video tendencia por país")
     print("4- Video tendencia por categorias")
@@ -95,12 +98,15 @@ while True:
    
     elif int(inputs[0]) == 3:
         Pais=input(" Digite el pais ")
-        req2= controller.videospaises(catalog,Pais)
-        printResults1(req2)
-
+        req2=controller.requerimiento2(catalog,Pais)
+        printreq2(req2)
         print ("Se ejecuto requerimiento 2")
    
     elif int(inputs[0]) == 4:
+        nombrecategoria=input(" Digite el nombre de la categoria ")
+        req3=controller.requerimiento3(catalog,nombrecategoria)
+        #printreq3(req3)
+        print(req3)
         print ("Se ejecuto requerimiento 3")
     
     elif int(inputs[0]) == 5:
