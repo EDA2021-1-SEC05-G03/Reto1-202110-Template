@@ -44,6 +44,17 @@ def printResults(catalog, sample=1):
              print('Titulo: ' + video['title'] + ' Titulo del canal: ' + 
                  video['channel_title'] + '  Fecha de tendencia: ' + video['trending_date']+ " pais: "+ video["country"] + " visitas: " + video["views"]+ " likes: " + video["likes"]+ " Dislikes: "+ video["dislikes"])
              i+=1
+def printreq1(req1):
+    elements = req1['elements']
+    for video in elements:
+        print('  Fecha de tendencia: ' + video['trending_date']+'Titulo: ' + video['title'] + ' Titulo del canal: ' + video['channel_title'] +  " Hora de publicacion: "+ video["publish_time"] + " visitas: " + video["views"]+ " likes: " + video["likes"]+ " Dislikes: "+ video["dislikes"])
+             
+def printResults1(req2):
+    elements = req2['elements']
+    for video in elements:
+             print(" id "+ video["video_id"]+' Titulo: ' + video['title'] + ' Titulo del canal: ' + video['channel_title'] + " pais: "+ video["country"] + ' repetido '+ mode(video["video_id"]))
+
+
 
 def printMenu():
     print("Bienvenido")
@@ -73,17 +84,25 @@ while True:
         print ("Se cargaron "+ str(lt.size(catalog["category"])) +" categorias")
         print(catalog["category"])
         printResults(catalog,1)
+    
     elif int(inputs[0]) == 2:
-        t1=time.process_time()
         Nombrecategoria=input(" Digite el nombre de la categoria ")
         Pais=input(" Digite el pais ")
         n=int(input(" Digite el numero de videos que quiere listar "))
-        controller.sortvideos(catalog, Nombrecategoria, Pais, n)
+        req1=controller.requerimiento1(Nombrecategoria,Pais,n,catalog)
+        printreq1(req1)
         print("Se ejecuto requerimiento 1")
+   
     elif int(inputs[0]) == 3:
+        Pais=input(" Digite el pais ")
+        req2= controller.videospaises(catalog,Pais)
+        printResults1(req2)
+
         print ("Se ejecuto requerimiento 2")
+   
     elif int(inputs[0]) == 4:
         print ("Se ejecuto requerimiento 3")
+    
     elif int(inputs[0]) == 5:
         print ("Se ejecuto requerimiento 4")
 

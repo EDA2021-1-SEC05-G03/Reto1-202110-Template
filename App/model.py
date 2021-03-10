@@ -27,7 +27,9 @@
 
 import config as cf
 import time
+from DISClib.Algorithms.Sorting import quicksort as qu
 from DISClib.ADT import list as lt
+from statistics import mode
 assert cf
 
 """
@@ -57,13 +59,53 @@ def addvideo (catalog, video):
 
 def addcategory (catalog,categorias):
     lt.addLast(catalog["category"],categorias)
+
 def comparevideosid(video1, video2):
-    return (float(video1['video_id']) < float(video2['video_id']))
+    return (video1['video_id']) <= (video2['video_id'])
+
 def comparecategoryid(video1, video2):
     return (float(video1['id']) < float(video2['id']))
 
+def compareviews(video1, video2):
+    return (float(video1['views']) > float(video2['views']))
 
 
+
+
+def idcategoria(catalog,Nombrecategoria):
+    categorias=""
+    for cate in lt.iterator(catalog["category"]):
+        if cate["name"]==Nombrecategoria:
+            categorias=cate["id"]
+    return categorias
+
+def filtros(catalog,Pais,categorias):
+    lista_filtros=lt.newList("ARRAY_LIST")
+    for video in lt.iterator(catalog['videos']):
+        if video["country"]==Pais and video["category_id"]==categorias :
+            lt.addLast(lista_filtros,video)     
+    return lista_filtros
+
+def sortvideos(lista_filtros,n):
+    qu.sort(lista_filtros, compareviews)
+    sub_list = lt.subList(lista_filtros,1,n)
+    return sub_list
+
+def sortvideosid(lst, size):
+    sub_list = lt.subList(lst, 0, size)
+    sub_list = sub_list.copy()
+    sorted_list = qu.sort(sub_list, comparevideosid)
+    return sorted_list
+
+def videospaises(catalog, Pais):
+    lista_paises=lt.newList("ARRAY_LIST")
+    for video in lt.iterator(catalog['videos']):
+        if video["country"]==Pais :
+            lt.addLast(lista_paises,video)  
+    videos = sortvideosid(lista_paises, lt.size(lista_paises))
+    return videos
+
+        
 
 # Construccion de modelos
 

@@ -25,11 +25,7 @@ import model
 import csv
 from DISClib.ADT import list as lt
 import time
-from DISClib.Algorithms.Sorting import shellsort as sa
-from DISClib.Algorithms.Sorting import insertionsort as ins
-from DISClib.Algorithms.Sorting import selectionsort as sel
-from DISClib.Algorithms.Sorting import quicksort as qu
-from DISClib.Algorithms.Sorting import mergesort as me
+
 
 
 
@@ -51,30 +47,16 @@ def cargardatoss(category):
     input_file = csv.DictReader(open(cfile, encoding='utf-8'))
     for categorias in input_file:
         model.addcategory(category,categorias)
-def compareviews(video1, video2):
-    return (float(video1['views']) > float(video2['views']))
 
-def sortvideos(catalog, Nombrecategoria, Pais, n):
-    sub_list = lt.subList(catalog['videos'], 1, n )
-    sub_list = sub_list.copy()
-    sorted_list = qu.sort(sub_list, compareviews)
-    size = lt.size(catalog["videos"])
-    if(size > n):
-         print("Los  ", n, "videos son:")
-         i = 1
-         while i <= n:
-             video = lt.getElement(sorted_list, i)
-             print('Titulo: ' + video['title'] + ' pais: ' + 
-                 video['country'] + ' Titulo del canal: ' + 
-                 video['channel_title'] + '  Fecha de tendencia: ' + video['trending_date']+ " hora de publicacion: "+ video["publish_time"] + " visitas: " + video["views"]+ " likes: " + video["likes"]+ " Dislikes: "+ video["dislikes"])
-             i+=1
+def requerimiento1(Nombrecategoria, Pais,n,catalog):
+    categorias = model.idcategoria(catalog,Nombrecategoria)
+    lista_filtros = model.filtros(catalog,Pais,categorias)
+    porviews = model.sortvideos(lista_filtros,n)
+    return porviews
 
+def videospaises(catalog, country):
+    return model.videospaises(catalog,country)
 
-
-
-
-
-    
 
     
 # Inicialización del Catálogo de libros
