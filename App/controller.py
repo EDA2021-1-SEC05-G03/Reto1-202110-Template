@@ -62,8 +62,15 @@ def requerimiento2(catalog, Pais):
 def requerimiento3(catalog,Nombrecategoria):
     categorias = model.idcategoria(catalog,Nombrecategoria)
     videosfiltrados= model.videoscategoryname(catalog,categorias)
-    masrepetido = model.masrepetido1(videosfiltrados)
+    ordenado= model.sortvideosidcategoryx(videosfiltrados)
+    masrepetido = model.masrepetido1(ordenado)
     return masrepetido
+    
+def requerimiento4(catalog, Pais, n, tagsbuscar):
+    lista_filtros4 = model.filtros4(catalog,Pais,tagsbuscar)
+    porlikes = model.sortvideos4(lista_filtros4,n)
+    return porlikes
+
 # Inicialización del Catálogo de libros
 
 # Funciones para la carga de datos

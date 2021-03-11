@@ -56,6 +56,10 @@ def printreq2(req2):
 def printreq3(req3):
     print('Titulo: ' + req3[0]['title'] + ' Titulo del canal: ' + req3[0]['channel_title'] +  " id de la categoria: "+ req3[0]["category_id"] +" Dias: " + str(req3[1]))
 
+def printreq4(req4):
+    elements = req4['elements']
+    for v in elements:
+        print('Titulo: ' + v['title'] + ' Titulo del canal: ' + v['channel_title'] +  " Tiempo de publicacion: "+ v["publish_time"] +" likes: " + v["likes"]+ " Dislikes: "+ v["dislikes"]+ " tags " + v["tags"])
 
 
 
@@ -76,7 +80,7 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
-        estructuradedatos=input("Cual estructura de datos desea ? (ARRAY_LIST/LINKED_LIST) ")
+        estructuradedatos="ARRAY_LIST"
         print("Cargando información de los archivos ....")
         catalog = controller.initcatalog(estructuradedatos)
         controller.cargardatos(catalog)
@@ -105,11 +109,15 @@ while True:
     elif int(inputs[0]) == 4:
         nombrecategoria=input(" Digite el nombre de la categoria ")
         req3=controller.requerimiento3(catalog,nombrecategoria)
-        #printreq3(req3)
-        print(req3)
+        printreq3(req3)
         print ("Se ejecuto requerimiento 3")
     
     elif int(inputs[0]) == 5:
+        tagsbuscar=str(input("Digite el nombre del tag: "))
+        Pais=str(input("Digite el pais: "))
+        n=int(input("Digite el numero de videos que quiere listar: "))
+        req4=controller.requerimiento4(catalog, Pais, n, tagsbuscar)
+        printreq4(req4)
         print ("Se ejecuto requerimiento 4")
 
     else:

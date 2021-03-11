@@ -56,7 +56,6 @@ def newCatalog(estructuradedatos):
 
 def addvideo (catalog, video):
     lt.addLast(catalog["videos"],video)
-    tags=video['tags'].split('|')
 
 def addcategory (catalog,categorias):
     lt.addLast(catalog["category"],categorias)
@@ -69,6 +68,9 @@ def comparecategoryid(video1, video2):
 
 def compareviews(video1, video2):
     return (float(video1['views']) > float(video2['views']))
+
+def comparelikes(video1, video2):
+    return (float(video1['likes']) > float(video2['likes']))
 
 
 
@@ -127,7 +129,7 @@ def masrepetido(videos):
                nombre=lt.getElement(videos,i)    
             contador =0
         i+=1
-    return (nombre,videoconmasrep)
+    return (nombre,videoconmasrep+1)
 
 
 
@@ -135,37 +137,52 @@ def masrepetido(videos):
 
 
 
-def sortvideosidcategory(lst, size):
-    sub_list = lt.subList(lst, 0, size)
-    sub_list = sub_list.copy()
-    sorted_list = mg.sort(sub_list, comparecategoryid)
-    return sorted_list
+
 
 def videoscategoryname(catalog, categorias):
     lista_categorias=lt.newList("ARRAY_LIST")
     for video in lt.iterator(catalog['videos']):
-        if video["category_id"]==categorias :
+        if video["category_id"]==categorias and video["video_id"] !='#NAME?' :
             lt.addLast(lista_categorias,video)  
-    video = sortvideosidcategory(lista_categorias, lt.size(lista_categorias))
-    return video
-
-def masrepetido1(video):
+    return lista_categorias
+def sortvideosidcategoryx(lista_categorias):
+    sorted_list = mg.sort(lista_categorias, comparevideosid)
+    return sorted_list
+def masrepetido1(lista_videos):
     i=0
     contador=0
-    videoconmasrep=0
-    nombre=0
-    while i < lt.size(video):
-        video1 =lt.getElement(video,i)
-        video2 =lt.getElement(video,i+1)
-        if video1["category_id"] == video2["category_id"]:
+    numerodeapariciones=0
+    video=""
+    while i < lt.size(lista_videos):
+        video1 =lt.getElement(lista_videos,i)
+        video2 =lt.getElement(lista_videos,i+1)
+        if video1["video_id"] == video2["video_id"] :
            contador+= 1
         else:
-            if contador > videoconmasrep:
-               videoconmasrep = contador
-               nombre=(lt.getElement(video,i))   
+            if contador > numerodeapariciones:
+               numerodeapariciones = contador
+               video=(lt.getElement(lista_videos,i))   
             contador =0
         i+=1
-    return (nombre,videoconmasrep)
+    return (video,numerodeapariciones+1)
+
+
+def filtros4(catalog,Pais,tagsbuscar):
+    lista_filtros4=lt.newList("ARRAY_LIST")
+    #tags=video['tags'].split('|')
+    for video in lt.iterator(catalog['videos']):
+        if video["country"].strip()==Pais and tagsbuscar in video["tags"]:
+            lt.addLast(lista_filtros4,video)     
+    return lista_filtros4
+
+def sortvideos4(lista_filtros4,n):
+    mg.sort(lista_filtros4, comparelikes)
+    sub_lista4 = lt.subList(lista_filtros4,1,n)
+    return sub_lista4
+
+
+
+
 # Construccion de modelos
 
 # Funciones para agregar informacion al catalogo
